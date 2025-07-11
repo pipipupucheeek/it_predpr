@@ -1,43 +1,105 @@
-# Simple workflow for deploying static content to GitHub Pages
-name: Deploy static content to Pages
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <title>IT ПРЕДПРИЯТИЕ</title>
+    <style>
+        /* Общие стили для страницы */
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: "Times New Roman", serif;
+        }
 
-on:
-  # Runs on pushes targeting the default branch
-  push:
-    branches: ["main"]
+        /* Фон с картинкой */
+        .background {
+            background: url('1.png') no-repeat center center fixed;
+            background-size: cover;
+            height: 100vh;
+            position: relative;
+            color: black;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
 
-  # Allows you to run this workflow manually from the Actions tab
-  workflow_dispatch:
+        /* Заголовок посередине */
+        .background h1 {
+            font-size: 5rem;
+            margin: 0;
+            user-select: none;
+        }
 
-# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
-permissions:
-  contents: read
-  pages: write
-  id-token: write
+        /* Кнопка внизу */
+        .background .button-container {
+            position: absolute;
+            bottom: 50px;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+        }
 
-# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
-# However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
-concurrency:
-  group: "pages"
-  cancel-in-progress: false
+        .background button {
+            padding: 15px 40px;
+            font-size: 1.5rem;
+            font-family: "Times New Roman", serif;
+            cursor: pointer;
+            background-color: white;
+            border: 2px solid black;
+            color: black;
+            transition: background-color 0.3s, color 0.3s;
+        }
 
-jobs:
-  # Single deploy job since we're just deploying
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-      - name: Setup Pages
-        uses: actions/configure-pages@v5
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          # Upload entire repository
-          path: '.'
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+        .background button:hover {
+            background-color: black;
+            color: white;
+        }
+
+        /* Скрытый раздел со светлоголубым фоном */
+        .new-section {
+            display: none;
+            height: 100vh;
+            background-color: #add8e6; /* светлоголубой */
+            color: black;
+            font-family: "Times New Roman", serif;
+            font-size: 4rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .new-section.active {
+            display: flex;
+        }
+    </style>
+</head>
+<body>
+    <div class="background" id="mainSection">
+        <h1>IT ПРЕДПРИЯТИЕ</h1>
+        <div class="button-container">
+            <button id="openBtn">СЮДА</button>
+        </div>
+    </div>
+
+    <div class="new-section" id="secondSection">
+        КРУТЫЕ ПРОГРАММЫ ТОЛЬКО У НАС
+    </div>
+
+    <script>
+        const openBtn = document.getElementById('openBtn');
+        const mainSection = document.getElementById('mainSection');
+        const secondSection = document.getElementById('secondSection');
+
+        openBtn.addEventListener('click', () => {
+            mainSection.style.display = 'none';      // Скрываем фон с картинкой
+            secondSection.classList.add('active');   // Показываем новый раздел
+        });
+    </script>
+</body>
+</html>
